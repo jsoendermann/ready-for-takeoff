@@ -8,10 +8,10 @@ set :port, 7200
 set :public_folder, 'public'
 set :listeners, []
 
-device = GM1356::Device.new({ filter: 'a', speed: 'f' })
-device.read do |r|
-    settings.listeners.each do |l| l(r.spl.to_s) end
-end
+# device = GM1356::Device.new({ filter: 'a', speed: 'f' })
+# device.read do |r|
+#     settings.listeners.each do |l| l(r.spl.to_s) end
+# end
 
 get "/" do
     if !request.websocket?
