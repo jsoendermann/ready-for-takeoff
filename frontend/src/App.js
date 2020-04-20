@@ -45,6 +45,7 @@ const Container = styled.div`
 
 const NoiseText = styled.p`
     font-size: 100pt;
+    font-family: 'Yeseva One', cursive;
 `
 
 export default App
