@@ -33,4 +33,4 @@ class NoiseServer < Sinatra::Base
     end
 end
 
-run MyApp.run!
+run NoiseServer.run!
