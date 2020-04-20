@@ -11,10 +11,14 @@ class NoiseServer < Sinatra::Base
         set :listeners, []
         set :device, GM1356::Device.new({ filter: 'a', speed: 'f' })
 
+        
+
         settings.device.read do |r|
             puts 'Read ' + r.spl.to_s
             puts settings.listeners.to_s
             settings.listeners.each do |l| l(r.spl.to_s) end
+
+                sleep 1
         end
     end
 
