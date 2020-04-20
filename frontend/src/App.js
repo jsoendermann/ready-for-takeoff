@@ -7,7 +7,7 @@ function App() {
     useEffect(() => {
         const ws = new WebSocket('ws://' + window.location.host)
         ws.onmessage = m => {
-            const n = Number(m)
+            const n = Number(m.data)
             if (Number.isNaN(n)) {
                 return
             }
