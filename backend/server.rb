@@ -16,7 +16,6 @@ class NoiseServer < Sinatra::Base
                 return
             end
             settings.reading = true
-            puts 'Read ' + r.spl.to_s
             puts settings.listeners.to_s
             settings.listeners.each do |l| l(r.spl.to_s) end
         }
