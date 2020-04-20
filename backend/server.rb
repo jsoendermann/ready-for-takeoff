@@ -4,16 +4,16 @@ require 'sinatra/base'
 require 'sinatra-websocket'
 require 'gm1356'
 
-class MyApp < Sinatra::Base
+class NoiseServer < Sinatra::Base
     configure do
+        set :port, 7200
+        set :public_folder, 'public'
+        set :listeners, []
+
         device = GM1356::Device.new({ filter: 'a', speed: 'f' })
         device.read do |r|
             settings.listeners.each do |l| l(r.spl.to_s) end
         end
-
-        set :port, 7200
-        set :public_folder, 'public'
-        set :listeners, []
     end
 
     get "/" do
