@@ -16,7 +16,7 @@ get "/" do
         request.websocket do |ws|
             ws.onopen do
                 device.read do |r|
-                    EM.next_tick { ws.send(r.spl.to_s) }
+                    ws.send(r.spl.to_s) 
                 end
             end
         end
