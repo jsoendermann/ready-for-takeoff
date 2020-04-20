@@ -16,8 +16,11 @@ class NoiseServer < Sinatra::Base
                 return
             end
             settings.reading = true
-            puts settings.listeners.to_s
-            settings.listeners.each do |ws| ws.send(r.spl.to_s) end
+            settings.device.read |r| do
+                puts r.spl.to_s
+                puts settings.listeners.to_s
+                settings.listeners.each do |ws| ws.send(r.spl.to_s) end
+            end
         }
     end
 
