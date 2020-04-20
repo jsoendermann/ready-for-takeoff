@@ -17,7 +17,7 @@ class NoiseServer < Sinatra::Base
             end
             settings.reading = true
             puts settings.listeners.to_s
-            settings.listeners.each do |l| l(r.spl.to_s) end
+            settings.listeners.each do |ws| ws.send(r.spl.to_s) end
         }
     end
 
@@ -28,11 +28,11 @@ class NoiseServer < Sinatra::Base
         else
             request.websocket do |ws|
                 ws.onopen do
-                    settings.listeners << ws.send
+                    settings.listeners << ws
                 end
     
                 ws.onclose do
-                    settings.listeners.delete(ws.send)
+                    settings.listeners.delete(ws)
                 end
             end 
         end
