@@ -6,13 +6,11 @@ require 'gm1356'
 
 set :port, 7200
 set :public_folder, 'public'
+set :listeners, []
 
 device = GM1356::Device.new({ filter: 'a', speed: 'f' })
-
-listeners = []
-
 device.read do |r|
-    listeners.each do |l| l(r.spl.to_s)
+    settings.listeners.each do |l| l(r.spl.to_s) end
 end
 
 get "/" do
@@ -21,11 +19,11 @@ get "/" do
     else
         request.websocket do |ws|
             ws.onopen do
-                listeners << ws.send
+                settings.listeners << ws.send
             end
 
             ws.onclose do
-                listeners.delete(ws.send)
+                settings.listeners.delete(ws.send)
             end
         end 
     end
